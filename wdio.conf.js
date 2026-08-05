@@ -231,8 +231,12 @@ exports.config = {
     /**
      * Runs after a Cucumber step
      */
-    // afterStep: function ({ uri, feature, step }, context, { error, result, duration, passed, retries }) {
-    // },
+    afterStep: async function (step, scenario, result) {
+        if (!result.passed) {
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+            await browser.saveScreenshot(`./screenshots/FAILED-${timestamp}.png`);
+        }
+    },
     /**
      * Runs after a Cucumber scenario
      */
