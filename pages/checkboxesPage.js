@@ -21,6 +21,10 @@ class Checkbox {
 
     async open() {
         await browser.url('/checkboxes');
+        await browser.waitUntil(
+            async () => (await this.checkboxes).length >= 2,
+            { timeoutMsg: 'Checkboxes did not appear on the page' }
+        );
     }
 
     async isCheckboxSelected(index) {
