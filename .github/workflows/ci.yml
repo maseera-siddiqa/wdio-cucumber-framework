@@ -16,4 +16,17 @@ jobs:
         with:
           node-version: 22
       - run: npm ci
+      - run: mkdir -p screenshots
       - run: npm test
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results
+      - name: Upload failure screenshots
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: screenshots
