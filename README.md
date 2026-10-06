@@ -1,4 +1,5 @@
 # WebdriverIO + Cucumber Test Automation Framework
+Status: actively learning and extending this framework
 
 ![E2E Tests](https://github.com/maseera-siddiqa/wdio-cucumber-framework/actions/workflows/ci.yml/badge.svg)
 
@@ -6,7 +7,7 @@ An end-to-end test automation framework for web applications, written in JavaScr
 
 ## What is tested
 
-- **Login:** valid credentials show a success message, and invalid credentials show an error message.
+- **Login:** valid credentials show a success message and invalid credentials show an error message.
 - **Checkboxes:** toggling checkbox 1 and checkbox 2 changes their checked state.
 
 ## Tech stack
