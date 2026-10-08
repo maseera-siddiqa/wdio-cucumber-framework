@@ -9,6 +9,7 @@ An end-to-end test automation framework for web applications, written in JavaScr
 
 - **Login:** valid credentials show a success message and invalid credentials show an error message.
 - **Checkboxes:** toggling checkbox 1 and checkbox 2 changes their checked state.
+- **Dropdown:** selecting Option 1 or Option 2 shows that option as the selected value.
 
 ## Tech stack
 
@@ -26,12 +27,15 @@ An end-to-end test automation framework for web applications, written in JavaScr
 ├── features/
 │   ├── login.feature               # Login scenarios
 │   ├── checkboxes.feature          # Checkbox scenarios
+│   ├── dropdown.feature            # Dropdown scenarios
 │   └── step-definitions/
 │       ├── loginSteps.js           # Code behind the login scenarios
-│       └── checkboxSteps.js        # Code behind the checkbox scenarios
+│       ├── checkboxSteps.js        # Code behind the checkbox scenarios
+│       └── dropdownSteps.js        # Code behind the dropdown scenarios
 ├── pages/
 │   ├── loginPage.js                # Page Object for the login page
-│   └── checkboxesPage.js           # Page Object for the checkboxes page
+│   ├── checkboxesPage.js           # Page Object for the checkboxes page
+│   └── dropdownPage.js             # Page Object for the dropdown page
 ├── wdio.conf.js                    # WebdriverIO configuration
 └── package.json                    # Dependencies and npm scripts
 ```
