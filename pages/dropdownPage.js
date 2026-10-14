@@ -2,9 +2,9 @@ class DropdownPage {
   get dropdown() {
     return $("#dropdown");
   }
-    get selectedOption() {
-        return $("#dropdown option:checked");
-    }
+  get selectedOption() {
+    return $("#dropdown option:checked");
+  }
   async open() {
     await browser.url("/dropdown");
   }
