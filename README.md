@@ -1,5 +1,4 @@
 # WebdriverIO + Cucumber Test Automation Framework
-Status: actively learning and extending this framework
 
 ![E2E Tests](https://github.com/maseera-siddiqa/wdio-cucumber-framework/actions/workflows/ci.yml/badge.svg)
 
@@ -7,8 +6,8 @@ An end-to-end test automation framework for web applications, written in JavaScr
 
 ## What is tested
 
-- **Login:** valid credentials show a success message and invalid credentials show an error message.
-- **Checkboxes:** toggling checkbox 1 and checkbox 2 changes their checked state.
+- **Login:** valid credentials show a success message, and invalid credentials show an error message.
+- **Checkboxes:** checking and unchecking a box works, and checking an already checked box leaves it checked.
 - **Dropdown:** selecting Option 1 or Option 2 shows that option as the selected value.
 
 ## Tech stack
@@ -72,7 +71,7 @@ Run a single feature:
 npx wdio run wdio.conf.js --spec features/checkboxes.feature
 ```
 
-Run in headless mode (no browser window), as CI does:
+Run in headless mode (no browser window), as CI does (macOS and Linux):
 
 ```bash
 CI=true npm test
@@ -98,6 +97,8 @@ After each run it uploads the Allure results, and when a run fails it also uploa
 ## Design decisions
 
 - **Page Objects report facts and never judge them.** For example, `isCheckboxSelected()` returns `true` or `false`. The `expect(...)` check lives in the step definition, where the expected result is known, so the same Page Object method can serve many scenarios.
+- **Checkbox steps use `check` and `uncheck`, not a plain click.** A click flips whatever state it finds, so the tests would only pass if the page happened to start in the right state. `check` and `uncheck` read the state first and click only when needed, and one scenario covers the case where nothing should change.
+- **The dropdown feature is a Scenario Outline.** One scenario is written once, and a table of options supplies the values, so testing another option means adding one row.
 - **The checkboxes page waits for its elements to load.** Without this, a server error page caused a confusing crash (`Cannot read properties of undefined`). Now the test fails with a clear message: "Checkboxes did not appear on the page."
 - **Headless mode is only used in CI.** `wdio.conf.js` checks the `CI` environment variable, so local runs show a visible browser for debugging, and CI runs without a screen.
 - **Failures keep their evidence.** Screenshots and Allure data are saved as downloadable artifacts, because the CI machine is deleted after each run.
@@ -105,4 +106,4 @@ After each run it uploads the Allure results, and when a run fails it also uploa
 ## Known limitations
 
 - The tests depend on a free third-party practice site, which can be slow or occasionally down. A failed run is sometimes the site and not the code.
-- The checkbox scenarios rely on the page's default state (checkbox 1 unchecked, checkbox 2 checked), because toggling flips whatever state it finds. State-aware `check` and `uncheck` methods would remove that dependency.
+- Tests run in Chrome only. Other browsers are not configured.
