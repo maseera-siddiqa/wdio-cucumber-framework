@@ -36,6 +36,20 @@ class Checkbox {
         const boxes = await this.checkboxes;
         await boxes[index].click();
     }
+
+    async check(index) {
+        const selected = await this.isCheckboxSelected(index);
+        if(!selected) {
+            await this.toggleCheckbox(index);
+        }
+    }
+
+    async uncheck(index) {
+        const selected = await this.isCheckboxSelected(index);
+        if(selected) {
+            await this.toggleCheckbox(index);
+        }
+    }
 }
 
 module.exports = new Checkbox();
