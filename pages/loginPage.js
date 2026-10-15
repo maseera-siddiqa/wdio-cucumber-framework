@@ -33,6 +33,10 @@ class LoginPage {
     }
 
     async getFlashMessage() {
+        await this.flashMessage.waitForDisplayed({
+            timeout: 20000,
+            timeoutMsg: 'Flash message did not appear'
+        });
         return await this.flashMessage.getText();
     }
 }
